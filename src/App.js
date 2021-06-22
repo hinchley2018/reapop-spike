@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import NotificationsSystem, {atalhoTheme, POSITIONS, setUpNotifications, useNotifications } from 'reapop';
+import NotificationsSystem, {atalhoTheme, bootstrapTheme, POSITIONS, setUpNotifications, STATUSES, useNotifications } from 'reapop';
 const App = () => {
   const [users, setUsers] = useState([])
   const {notify, notifications, dismissNotification} = useNotifications();
@@ -11,7 +11,7 @@ const App = () => {
       setUsers(await response.json());
       notify("Loaded users", "info")
     } catch (error) {
-      notify("failed to load users", "danger")
+      notify("failed to load users", STATUSES.error)
     }
     
   
@@ -30,7 +30,7 @@ const App = () => {
       <NotificationsSystem
         notifications={notifications}
         dismissNotification={id => dismissNotification(id)}
-        theme={atalhoTheme}
+        theme={bootstrapTheme}
       />
     </div>
   );
